@@ -15,7 +15,7 @@ public class NetworkClient {
 
     public static Retrofit getRetrofit(){
 
-        if(retrofit==null){
+        if (retrofit==null){
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             OkHttpClient okHttpClient = builder.build();
 
