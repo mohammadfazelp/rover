@@ -7,7 +7,7 @@ import android.util.Log;
 import com.faz.rover2d.data.network.INetwork;
 import com.faz.rover2d.data.network.NetworkClient;
 import com.faz.rover2d.data.network.model.RoverRequest;
-import com.faz.rover2d.data.network.model.RoverResult;
+import com.faz.rover2d.data.network.model.RoverBehaviorResponse;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -25,24 +25,24 @@ public class MainPresenter implements IMainPresenter {
 
     @SuppressLint("CheckResult")
     @Override
-    public void getRover() {
+    public void getRoverBehaviorFromServer() {
         getObservable().subscribeWith(getObserver());
     }
 
-    private Observable<RoverResult> getObservable(){
+    private Observable<RoverBehaviorResponse> getObservable(){
 
         return NetworkClient.getRetrofit().create(INetwork.class)
-                .getRover(new RoverRequest("12856509"))
+                .getRoverBehaviorFromServer("12856509")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private DisposableObserver<RoverResult> getObserver(){
+    private DisposableObserver<RoverBehaviorResponse> getObserver(){
 
-        return new DisposableObserver<RoverResult>() {
+        return new DisposableObserver<RoverBehaviorResponse>() {
 
             @Override
-            public void onNext(@NonNull RoverResult result) {
+            public void onNext(@NonNull RoverBehaviorResponse result) {
                 Log.d(TAG,"OnNext"+result.toString());
                 _mainView.displayResult(result);
             }
@@ -57,7 +57,7 @@ public class MainPresenter implements IMainPresenter {
             @Override
             public void onComplete() {
                 Log.d(TAG,"Completed");
-                _mainView.showToast("completed!");
+                //_mainView.showToast("completed!");
             }
         };
     }

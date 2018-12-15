@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class RoverResult {
+public class RoverBehaviorResponse {
 
     @Expose
     @SerializedName("start_point")
@@ -19,7 +19,10 @@ public class RoverResult {
     @SerializedName("weirs")
     private ArrayList<PointModel> weirs;
 
-    public RoverResult(PointModel start_point, String command, ArrayList<PointModel> weirs) {
+    public RoverBehaviorResponse(PointModel start_point,
+                                 String command,
+                                 ArrayList<PointModel> weirs) {
+
         this.start_point = start_point;
         this.command = command;
         this.weirs = weirs;
